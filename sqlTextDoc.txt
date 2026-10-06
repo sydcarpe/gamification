@@ -1,0 +1,118 @@
+CREATE TABLE User(
+    ID int AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    fname varchar(255),
+    lname varchar(255),
+    userDesc varchar(500)
+);
+
+INSERT INTO User(fname, lname, userDesc)
+VALUES ("Sydney", "Carpenter", "really cool, really punk")
+;
+CREATE TABLE task(
+    ID int AUTO_INCREMENT PRIMARY KEY NOT NULL, 
+    title varchar(255),
+    description varchar(500),
+    completed BOOL,
+    userID INT NOT NULL, 
+    FOREIGN KEY (userID) REFERENCES User(ID) 
+);
+
+INSERT INTO task(title, description, userID)
+VALUES ("task1", "This is task 1", 1),
+        ("task2", "This is task 2", 1),
+        ("task3", "This is task 3", 1),
+        ("task4", "This is task 4", 1);
+
+
+//added longest streak, current streak, and last Completed day later on. 
+CREATE TABLE habit(
+    ID int AUTO_INCREMENT PRIMARY KEY NOT NULL, 
+    title varchar(255),
+    description varchar(500),
+    completed BOOL,
+    userID INT NOT NULL, 
+    longestStreak INT NOT NULL DEFAULT 0,
+    currentStreak INT NOT NULL DEFAULT 0,
+    lastCompletedDate DATE, 
+    FOREIGN KEY (userID) REFERENCES User(ID)
+);
+
+INSERT INTO habit(title, description, userID)
+VALUES ("walk", "one 30 min walk a day", 1),
+       ("96oz water", "drink 3 water bottles a day", 1);
+
+CREATE TABLE Dailies(
+    userID INT NOT NULL, 
+    habitID INT NOT NULL, 
+    FOREIGN KEY (userID) REFERENCES User(ID),
+    FOREIGN KEY (habitID) REFERENCES habit(ID)
+);
+
+INSERT INTO dailies
+VALUES(1, 1),
+(1,2);
+
+//getting all the habits in the users dailies 
+SELECT * FROM habit hb
+INNER JOIN Dailies d on hb.ID = d.habitID
+WHERE d.userID = 1;
+
+
+CREATE TABLE points(
+    userID INT NOT NULL,
+    currentPoints INT NOT NULL DEFAULT 0
+)
+
+//updating all the tables to includes points
+ALTER table task 
+ADD points int NOT NULL DEFAULT 0;
+
+ALTER table habit
+ADD points int NOT NULL DEFAULT 0;
+
+
+CREATE TABLE quest(
+id INT AUTO_INCREMENT NOT NULL, 
+title varchar(255) NOT NULL, 
+totalXP INT, 
+description varchar(500),
+completed BOOL,
+userID INT NOT NULL,
+PRIMARY KEY (id), 
+FOREIGN KEY (userID) REFERENCES User(id)
+);
+
+CREATE TABLE questHabits(
+    questID INT NOT NULL, 
+    habitID INT NOT NULL, 
+    FOREIGN KEY (questID) REFERENCES quest(id),
+    FOREIGN KEY (habitID) REFERENCES habit(id)
+);
+
+CREATE TABLE questTasks(
+    questID INT NOT NULL, 
+    taskID INT NOT NULL, 
+    FOREIGN KEY (questID) REFERENCES quest(id),
+    FOREIGN KEY (taskID) REFERENCES task(id)
+);
+
+INSERT INTO questHabits(questID, habitID)
+VALUES(1,8), (2,9), (3,10);
+
+INSERT INTO questTasks(questID, taskID)
+VALUES (1, 22), (2,23), (3, 24);
+
+
+SELECT * FROM questTasks qt
+INNER JOIN quest q on q.ID = qt.questID
+INNER JOIN task t on t.ID = qt.taskID
+WHERE q.userID = 1
+AND questID = 1;
+
+
+SELECT * FROM task t 
+WHERE NOT EXISTS 
+(SELECT * FROM questTasks qt WHERE qt.taskID = t.ID) 
+AND userID = ?
+
+

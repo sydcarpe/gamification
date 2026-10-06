@@ -1,0 +1,34 @@
+.questEditContainer{
+    background-color: orange;
+    width: 500px;
+    position: fixed;
+    top:15em;
+    padding: 2.0em;
+}
+
+.allQuestContainer{
+    background-color:pink;
+    height: 30em;
+    overflow:scroll;
+    top: 15px;
+}
+
+.questContainer{
+    width: 100%;
+}
+/*The entire edit pop up. Includes the habit and task creation*/
+.editQuestPopUp{
+    display:flex;
+    flex-direction: row;
+}
+
+/*Edit quest container ONLY edit quest*/
+.editQuestCont{
+    display:flex;
+
+}
+
+.createHabitsBtn{
+    max-height: fit-content;
+    align-self: flex-end;
+}

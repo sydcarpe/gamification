@@ -1,0 +1,4 @@
+.habitRow{
+    display: flex;
+    flex-direction: row;
+}
