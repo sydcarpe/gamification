@@ -38,19 +38,33 @@ $quest = $getQuestResult->fetch_assoc();
         </form>
     </div>
 
-    <!--add habit btn-->
+    <!--add habit and task btn-->
     <button class="createHabitsBtn" id="createHabitsBtn"> Add New Habit </button>
+    <button class="createTaskBtn" id="createTaskBtn"> Add New Task </button>
 
     <!-- Add Habits form-->
     <div class="addHabitToQuest" id="addHabitID" style='display:none'>
-        <form id="createHabitForm" action="quest/addHabittoQuest.php" method="post"> 
+        <form id="createHabitForm" action="quest/addHabittoQuest.php" method="post">
             <p> habit </p>
             <input type='text' name='habitTitle' required>
             <p> description </p>
             <textarea name='habitDesc'></textarea>
             <!--getting questID-->
-            <input type='hidden' name='questID' value= <?php echo $questID; ?> >
+            <input type='hidden' name='questID' value=<?php echo $questID; ?>>
             <button type="submit" id="createHabitbtn">Create Habit</button>
         </form>
+    </div>
+
+    <!-- Add task Form -->
+    <div class="createTaskPopup" style="display:none;" id="taskCreationDisplay">
+        <form id="createTaskForm" action="quest/addTasktoQuest.php" method="post">
+            <p> task </p>
+            <input type='text' name='taskTitle' required>
+            <p> description </p>
+            <textarea name='taskDesc'></textarea>
+            <button type="submit" id="createTaskBtn">Create Task</button>
+            <input type='hidden' name='questID' value =<?php echo $questID; ?>> 
+        </form>
+        <div id="tempMessage"></div>
     </div>
 </div>

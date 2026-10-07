@@ -32,3 +32,8 @@
     max-height: fit-content;
     align-self: flex-end;
 }
+
+.createTaskBtn {
+    max-height: fit-content;
+    align-self: flex-end;
+}

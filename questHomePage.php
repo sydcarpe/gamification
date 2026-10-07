@@ -110,7 +110,7 @@ include "databaseInfo.php";
                 console.log("Detail!");
                 const questID = event.target.dataset.id;
 
-                window.location.href =`quest/detailedQuestEdit.php?questID=${questID}`;
+                window.location.href = `quest/detailedQuestEdit.php?questID=${questID}`;
             }
 
         });
@@ -156,23 +156,23 @@ include "databaseInfo.php";
             } catch (err) {
                 console.error(err);
             }
+            
         })
 
 
         questEditContainer.addEventListener("click", async (event) => {
+            const questInfo = document.getElementById("editQuestContID");
+            const addHabitsDisplay = document.getElementById("addHabitID");
+            const addTaskDisplay = document.getElementById("taskCreationDisplay");
+            const createHabitBtn = document.getElementById("createHabitsBtn");
+            const addTaskBtn = document.getElementById("createTaskBtn");
+
             if (event.target.id === "createHabitsBtn") {
-                //create the variables WITHIN the event listeners!! 
-                const addHabitsDisplay = document.getElementById("addHabitID");
-                const questInfo = document.getElementById("editQuestContID")
-                const createHabitBtn = document.getElementById("createHabitsBtn");
-                const addHabitCont = document.getElementById("addHabitID");
-
-
+                //create the variables WITHIN the event listeners!!
                 addHabitsDisplay.style.display = "block";
                 questInfo.style.display = "none";
                 createHabitBtn.style.display = "none";
-
-
+                addTaskBtn.style.display = "none";
 
 
                 /* trying something while I hold this
@@ -198,6 +198,16 @@ include "databaseInfo.php";
                     */
 
             }
+
+
+            if (event.target.id === "createTaskBtn") {
+                addTaskDisplay.style.display = "block";
+                questInfo.style.display = "none";
+                createHabitBtn.style.display = "none";
+                addTaskBtn.style.display = "none";
+
+            }
+
         })
 
         refreshQuests();
