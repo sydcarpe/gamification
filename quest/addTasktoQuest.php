@@ -8,7 +8,7 @@ $taskTitle = (trim($_POST['taskTitle'] ?? ''));
 $taskDescription = (trim($_POST['taskDesc'] ?? ''));
 $questID = $_POST['questID'];
 
-$createTaskSQL = "INSERT INTO Task(title, description, userID) VALUES (?,?,?);";
+$createTaskSQL = "INSERT INTO task(title, description, userID) VALUES (?,?,?);";
 $createTask = $conn->prepare($createTaskSQL);
 if(!$createTask){
     echo json_encode([

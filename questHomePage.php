@@ -94,7 +94,7 @@ include "databaseInfo.php";
                 deleteQuest(questID);
             }
 
-
+            //editing the quest
             if (event.target.classList.contains("editQuestBtn")) {
                 const questID = event.target.dataset.id;
                 //console.log("questID= " + questID);
@@ -103,9 +103,10 @@ include "databaseInfo.php";
                 const questHTML = await viewQuestDisplay.text();
                 questEditContainer.innerHTML = questHTML;
 
-                //editQuest(questID);
+                
             }
 
+            //navigating to a new page to a more detailed edit
             if (event.target.classList.contains("detailedEditQuest")) {
                 console.log("Detail!");
                 const questID = event.target.dataset.id;
@@ -124,7 +125,7 @@ include "databaseInfo.php";
         //now while in here, if the user clicks create habit it will submit and create the habit while adding it to the quest
         questEditContainer.addEventListener("submit", async (event) => {
             console.log("submitted beech");
-            if (event.target.id !== "createHabitForm") return;
+            if (event.target.id !== "createHabitForm" || event.target.id !== "createTaskForm") return;
             event.preventDefault();
 
             const form = event.target;
@@ -156,6 +157,12 @@ include "databaseInfo.php";
             } catch (err) {
                 console.error(err);
             }
+
+            try{
+
+            } catch(err){
+                console.error(err);
+            }
             
         })
 
@@ -173,30 +180,6 @@ include "databaseInfo.php";
                 questInfo.style.display = "none";
                 createHabitBtn.style.display = "none";
                 addTaskBtn.style.display = "none";
-
-
-                /* trying something while I hold this
-                addHabitCont.addEventListener("submit", async (event)=>{
-                    try{
-                        const response = await fetch (`quest/addHabittoQuest.php`, {
-                            method: "POST",
-                            body: JSON.stringify ({
-                                questID : questID
-                            })
-                        });
-                        const result = await response.json();
-
-                        if(result.success){
-                            console.log("did it");
-                        }
-
-
-                    } catch (err){
-                        console.error(err);
-                    }
-                })
-                    */
-
             }
 
 
