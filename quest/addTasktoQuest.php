@@ -17,6 +17,7 @@ if(!$createTask){
     ]);
     exit;
 }
+
 $createTask->bind_param("ssi", $taskTitle, $taskDescription, $user_id);
 
 if(!$createTask->execute()){
@@ -26,9 +27,6 @@ if(!$createTask->execute()){
     ]);
     exit;
 }
-
-$taskID = $createTask->insert_id;
-
 
 //Adding it to the quest now 
 $addTasktoQuestSQL = "INSERT INTO questTasks(questID, taskID) VALUES (?,?);";
@@ -42,7 +40,13 @@ if(!$addTasktoQuest){
     exit;
 }
 
-$addTasktoQuest->bind_param("ii", $questID, $taskID);
+echo json_encode([
+    "success" => true, 
+    "taskID" => $createTask->insert_id
+]);
+
+$taskID = $createTask->insert_id; //creating and getting the new taskID
+$addTasktoQuest->bind_param("ii", $questID, $taskID); //adding into the quest table
 
 if(!$addTasktoQuest->execute()){
     echo json_encode([
@@ -52,12 +56,13 @@ if(!$addTasktoQuest->execute()){
     exit;
 }
 
+/*
 //getting new data 
 echo json_encode([
     "success" => true,
     "taskID" => $createTask->insert_id
 ]);
-
+*/
 $createTask->close();
 $addTasktoQuest->close();
 $conn->close();

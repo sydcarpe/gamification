@@ -125,15 +125,19 @@ include "databaseInfo.php";
         //now while in here, if the user clicks create habit it will submit and create the habit while adding it to the quest
         questEditContainer.addEventListener("submit", async (event) => {
             console.log("submitted beech");
-            if (event.target.id !== "createHabitForm" || event.target.id !== "createTaskForm") return;
+            if (event.target.id !== "createHabitForm" && event.target.id !== "createTaskForm") return;
             event.preventDefault();
 
             const form = event.target;
+            //using this to create which form i am sending it to :p 
+            const endGoal = form.id === "createHabitForm" ? "quest/addHabittoQuest.php" : "quest/addTasktoQuest.php";
+
+
             const formData = new FormData(form);
 
             //gathering form data
             try {
-                const response = await fetch("quest/addHabittoQuest.php", {
+                const response = await fetch(endGoal, {
                     method: "POST",
                     body: formData
                 })
@@ -145,7 +149,7 @@ include "databaseInfo.php";
                 console.log("parsed PHP RESULT: ", result);
 
                 if (result.success) {
-                    console.log("habit created");
+                    console.log("added to quest");
                     form.reset();
                     await refreshQuests();
                     questEditContainer.style.display = "none";
