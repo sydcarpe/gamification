@@ -41,6 +41,8 @@ include "databaseInfo.php";
     <!--This is displaying all quests. I am thinking I may wrap this container-->
 
     <h2> All Quests </h2>
+    <button id="createNewQuestBtn" onclick="createQuestDisplay()"> Create New Quest </button>
+
     <div class="allQuestContainer"> <!--flex container to wrap the quests-->
         <div id="questContainer">
             <div id="questDetails"></div>
@@ -52,7 +54,17 @@ include "databaseInfo.php";
     <!--Make this a pop up?-->
 
     <div id="questEditContainer" class="questEditContainer" style="display:none;"><!-- This is the entire popup to dsiplay --></div>
+    <div id="createQuestContainer" class="createQuestContainer" style="display:none;">
+        <form id="createQuestForm" method="post" action="quest/createQuest.php">
+            <h2> Create new Quest </h2>
+            <p> Quest Name </p>
+            <input type="text" required name = "questTitle">
+            <p> description </p>
+            <input type="textbox" name="questDescription">
+            <input type="submit" value ="Create Quest">
+        </form>
 
+    </div>
 
 
     <script>
@@ -65,6 +77,7 @@ include "databaseInfo.php";
         let currentQuestID = null;
         const singleQuestViewer = document.getElementById("singleQuestViewer");
         const viewAllQuestBtn = document.getElementById("viewAllQuests");
+
 
         //updating quest tasks/habits when checkbox is clicked 
         questContainer.addEventListener("change", (event) => {
@@ -102,8 +115,6 @@ include "databaseInfo.php";
                 questEditContainer.style.display = "block";
                 const questHTML = await viewQuestDisplay.text();
                 questEditContainer.innerHTML = questHTML;
-
-                
             }
 
             //navigating to a new page to a more detailed edit
@@ -117,8 +128,49 @@ include "databaseInfo.php";
         });
 
 
-        //quest pop up page :p
 
+        //Create Quest Stuff
+        const createQuestContainer = document.getElementById("createQuestContainer");
+        const createQuestBtn = document.getElementById("createQuestBtn");
+
+        function createQuestDisplay() {
+            createQuestContainer.style.display = "block";
+            console.log("you've been clicked");
+        }
+
+        createQuestContainer.addEventListener("submit", async (event)=>{
+            if (event.target.id !== "createQuestForm") return;
+
+            event.preventDefault();
+
+            const createQuestForm = event.target;
+            const creatQuestFormData = new FormData(createQuestForm);
+
+            try{
+                const createQuestResponse = await fetch("quest/createQuest.php", {
+                    method: "POST",
+                    body: creatQuestFormData
+                })
+                const responseText = await createQuestResponse.text();
+                console.log("RAW PHP: ", responseText);
+                const result = JSON.parse(responseText);
+                console.log("Parsed: ", result);
+
+                if (result.success) {
+                    console.log("quest created");
+                    createQuestForm.reset();
+                    await refreshQuests();
+                    createQuestContainer.style.display = "none";
+
+                } else {
+                    console.error(result.message);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        })
+
+        //quest pop up edit page :p
         const editQuestPopup = document.getElementById("editQuestPopUp");
         const questEditContainer = document.getElementById("questEditContainer");
 
@@ -131,14 +183,13 @@ include "databaseInfo.php";
             //using this to create which form i am sending it to :p 
             //const endGoal = form.id === "createHabitForm" ? "quest/addHabittoQuest.php" : "quest/addTasktoQuest.php"; //fancy way of doing if -> else
 
-            if(form.id === "createHabitForm"){
+            if (form.id === "createHabitForm") {
                 endGoal = "quest/addHabittoQuest.php";
-            } else if(form.id === "createTaskForm"){
+            } else if (form.id === "createTaskForm") {
                 endGoal = "quest/addTasktoQuest.php";
-            } else if (form.id === "editQuestForm"){
+            } else if (form.id === "editQuestForm") {
                 endGoal = "quest/editQuest.php";
             }
-
 
             const formData = new FormData(form);
 
@@ -169,12 +220,12 @@ include "databaseInfo.php";
                 console.error(err);
             }
 
-            try{
+            try {
 
-            } catch(err){
+            } catch (err) {
                 console.error(err);
             }
-            
+
         })
 
 

@@ -34,7 +34,7 @@ $quest = $getQuestResult->fetch_assoc();
             <p> Description </p>
             <textarea name='questDescUpdate'><?php echo $quest['description']; ?></textarea>
             <input type='submit' value="Update">
-            <input type='text' name='questID' value=<?php echo $questID; ?>>
+            <input type='hidden' name='questID' value=<?php echo $questID; ?>>
         </form>
     </div>
 

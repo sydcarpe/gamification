@@ -1,34 +1,43 @@
-.questEditContainer{
+.questEditContainer {
     background-color: orange;
     width: 500px;
     position: fixed;
-    top:1em;
+    top: 1em;
     padding: 2.0em;
 }
 
-.allQuestContainer{
-    background-color:pink;
+.createQuestContainer {
+    background-color: orange;
+    width: 500px;
+    position: fixed;
+    top: 1em;
+    padding: 2.0em;
+}
+
+.allQuestContainer {
+    background-color: pink;
     height: 30em;
-    overflow:scroll;
+    overflow: scroll;
     top: 15px;
 }
 
-.questContainer{
+.questContainer {
     width: 100%;
 }
+
 /*The entire edit pop up. Includes the habit and task creation*/
-.editQuestPopUp{
-    display:flex;
+.editQuestPopUp {
+    display: flex;
     flex-direction: row;
 }
 
 /*Edit quest container ONLY edit quest*/
-.editQuestCont{
-    display:flex;
+.editQuestCont {
+    display: flex;
 
 }
 
-.createHabitsBtn{
+.createHabitsBtn {
     max-height: fit-content;
     align-self: flex-end;
 }

@@ -30,19 +30,11 @@ try {
     $deletequestTask->execute();
     $deletequestTask->close();
 
-    $deleteQuestHabit = $conn->prepare("DELETE FROM questHabits WHERE questID = ? ;");
-    $deleteQuestHabit->bind_param("i", $questID);
-    $deleteQuestHabit->execute();
-    $deleteQuestHabit->close();
-
-
-
     //deleting the quest tasks 
     while ($row = $getQuestTaskResults->fetch_assoc()) {
         $questTasks[] = $row;
         foreach ($questTasks as $task) {
             $deleteTask = $conn->prepare("DELETE FROM task WHERE ID = ?");
-
             $taskID = $task["ID"];
             $deleteTask->bind_param("i", $taskID);
             $deleteTask->execute();
@@ -58,6 +50,11 @@ try {
     $getQuestHabitsResult = $getQuestHabits->get_result();
 
     $questHabits = [];
+
+    $deleteQuestHabit = $conn->prepare("DELETE FROM questHabits WHERE questID = ? ;");
+    $deleteQuestHabit->bind_param("i", $questID);
+    $deleteQuestHabit->execute();
+    $deleteQuestHabit->close();
 
     //now we are deleting habits 
     while ($row = $getQuestHabitsResult->fetch_assoc()) {
