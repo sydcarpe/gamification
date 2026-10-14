@@ -8,10 +8,11 @@ function renderTasks(tasks) {
     const taskHtml = tasks.map(task => {
         return `
                 <div class="taskRow">
-                <input class="task-checkbox" type="checkbox" data-id="${task.ID}" ${task.completed == 1 ? "checked" : ""}>
-                <div class="singleTask" data-id="${task.ID}">
-                <p>${task.title}</p>
-                </div>
+                    <input class="task-checkbox" type="checkbox" data-id="${task.ID}" ${task.completed == 1 ? "checked" : ""}>
+                    <div class="singleTask" data-id="${task.ID}">
+                        <p class="indivdualTask">${task.title}</p>
+                    </div>
+                    <button class="deleteTaskBtn" data-id="${task.ID}"> X </button>
                 </div>
                 `
     }).join("");

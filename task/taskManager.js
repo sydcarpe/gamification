@@ -81,7 +81,7 @@ async function viewTask(taskID) {
                 document.getElementById("taskDetails").innerHTML = `
                 <h2>${task.title}</h2>
                 <p>${task.description}</p>
-                <button class="deleteBtn" data-id="${task.ID}">Delete </button>`;
+                `;
 
                 currentTaskID = taskID;
             }

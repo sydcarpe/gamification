@@ -53,40 +53,7 @@ async function updateHabitStatus(event) {
 }
 
 
-//creating a task
-/*
-async function createHabit() {
-    const formData = new FormData(createHabitForm);
-    //const errorMessage = document.getElementById("tempMessage");
 
-    try {
-        const createResponse = await fetch("habit/createHabit.php", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await createResponse.json();
-        console.log("Create response: ", data);
-
-        if (!createResponse.ok || !data.success) {
-            // errorMessage.textContent = data.error || "habit failed to be created...";
-            console.log(data.error);
-            return;
-        }
-
-        //errorMessage.textContent = "created";
-        createHabitForm.reset();
-        if (!window.location.pathname.endsWith('questHomePage.php')) {
-            await refreshDailies();
-        }
-
-        habitCreationDisplay.style.display = "none";
-        document.getElementById("viewCreateHabitBtn").style.display = "block";
-    } catch (err) {
-        console.error(err);
-    }
-}
-    */
 
 //update createHabit()
 async function createHabit(formData){
@@ -100,7 +67,7 @@ async function createHabit(formData){
 
 //viewing the habit
 async function viewHabit(habitID) {
-    console.log(habitID);
+    console.log("viewing: ", habitID);
 
     try {
         const response = await fetch("habit/viewHabit.php", {
@@ -129,7 +96,7 @@ async function viewHabit(habitID) {
 
                 //display the habits here! 
                 singleHabitView.innerHTML = `
-                <h2>${habit.title}</h2>
+                <h2 id="habitJSID">${habit.title}</h2>
                 <p>${habit.description}</p>
                 <p>longest Streak: ${habit.longestStreak}</p>
                 <p>current Streak: ${habit.currentStreak}</p>
@@ -164,7 +131,7 @@ async function viewHabit(habitID) {
 
 //deleting habit TO DO  
 async function deleteHabit(habitID) {
-    console.log(habitID);
+    console.log("deleteing" , habitID);
     try {
         const response = await fetch("habit/deleteHabit.php", {
             method: "POST",

@@ -7,6 +7,7 @@ header('Content-Type: application/json');
 $habitTitle = (trim($_POST['habitTitle']));
 $habitDesc = (trim($_POST['habitDesc'] ?? ""));
 
+
 $createHabitSQL = "INSERT INTO habit(title, description, userID) VALUES (?,?,?);";
 $createHabit = $conn->prepare($createHabitSQL);
 if(!$createHabit){
@@ -54,7 +55,6 @@ if(!$addDaily->execute()){
 }
 
 //getting new data 
-
 
 $createHabit->close();
 $addDaily->close();

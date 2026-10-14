@@ -1,4 +1,20 @@
+
+
 .habitRow{
     display: flex;
     flex-direction: row;
+    padding: .5em;
+    width: 100%;
+    align-items: center;
+}
+
+.singleHabit{
+    display:flex; 
+    width: 100%;
+    align-items: center;
+}
+
+
+.deleteHabitBtn{
+    margin-left: auto;
 }

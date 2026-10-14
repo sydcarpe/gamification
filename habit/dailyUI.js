@@ -8,10 +8,10 @@ function renderDailies(dailies) {
     const dailiesHTML = dailies.map(habit => {
         return `
                 <div class="habitRow">
+                <div class="singleHabit" id = "singleHabit"data-id="${habit.ID}">
                 <input class="habit-checkbox" type="checkbox" data-id="${habit.ID}" ${habit.completed == 1 ? "checked" : ""}>
-                <div class="singleHabit" data-id="${habit.ID}">
-                <p>${habit.title}</p>
-                <button class="deleteHabitBtn" data-id="${habit.ID}"> Delete</button>
+                <p class="individualHab" data-id="${habit.ID}">${habit.title}</p>
+                <button class="deleteHabitBtn" data-id="${habit.ID}"> X </button>
                 </div>
                 </div>
                 `
