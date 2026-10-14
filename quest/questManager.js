@@ -106,7 +106,7 @@ async function updateQuestStatus(questID, newStatus) {
     //console.log("new status", newStatus);
 
     try {
-        const response = await fetch("quest/UpdateQuestStatus.php", {
+        const response = await fetch("quest/updateQuestStatus.php", {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

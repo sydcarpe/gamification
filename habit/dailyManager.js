@@ -134,7 +134,6 @@ async function viewHabit(habitID) {
                 <p>longest Streak: ${habit.longestStreak}</p>
                 <p>current Streak: ${habit.currentStreak}</p>
                 <p>last completed date: ${habit.lastCompletedDate}</p>
-                <button class="deleteHabitBtn" data-id="${habit.ID}"> Delete</button>
                 `;
 
                 currentHabitID = habitID;

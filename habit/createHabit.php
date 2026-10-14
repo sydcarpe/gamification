@@ -4,8 +4,8 @@ require "../databaseInfo.php";
 header('Content-Type: application/json');
 
 
-$habitTitle = (trim($_POST['habitTitle'] ?? ''));
-$habitDesc = (trim($_POST['habitDesc'] ?? ''));
+$habitTitle = (trim($_POST['habitTitle']));
+$habitDesc = (trim($_POST['habitDesc'] ?? ""));
 
 $createHabitSQL = "INSERT INTO habit(title, description, userID) VALUES (?,?,?);";
 $createHabit = $conn->prepare($createHabitSQL);
