@@ -130,37 +130,12 @@ async function deleteTask(taskID) {
 }
 
 //creating the task after btn click 
-async function createTask() {
-    const formData = new FormData(createTaskForm);
-    const errorMessage = document.getElementById("tempMessage");
-
-    try {
-        const createResponse = await fetch("task/createTask.php", {
-            method: "POST",
-            body: formData
-        });
-
-        //if failing show this... 
-        const data = await createResponse.json();
-        console.log("Create Response:", data);
-        //const raw = await createResponse.text();
-        //console.log("RAW RESPONSE:", raw);
-        //errorMessage.textContent = raw;
-
-        if (!createResponse.ok || !data.success) {
-            errorMessage.textContent = data.error || "The task could not be created";
-            return;
-        }
-
-        errorMessage.textContent = "Task Created";
-        createTaskForm.reset();
-        await refreshTasks();
-
-        taskCreationDisplay.style.display = "none";
-        document.getElementById("createbtn").style.display = "block";
-    } catch (err) {
-        console.error(err);
-    }
+async function createTask(formData) {
+    const createResponse = await fetch ("task/createTask.php", {
+        method:"POST",
+        body: formData
+    });
+    return await createResponse.json();
 }
 
 //deleting all completed tasks from list 
@@ -187,5 +162,5 @@ async function deleteCompletedTasks() {
 
 function createTaskPopUp() {
     taskCreationDisplay.style.display = "block";
-    document.getElementById("createbtn").style.display = "none";
+    viewCreateTaskBtn.style.display = "none";
 }

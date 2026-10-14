@@ -37,25 +37,30 @@ include "databaseInfo.php";
 
     <div class="bodyContainer">
         <div class="containerOne">
-            <!-- All task information below here-->
-            <div id="taskContainer">
-                <!--This is where the tasks go! -->
-            </div>
-            <button type="submit" id="deleteCompleteTasks">Delete Finished</button>
+            <div class="taskBody">
+                <h2>To Do</h2>
+                <!-- All task information below here-->
+                <div id="taskContainer"><!--This is where the tasks go! --></div>
+                
 
-            <div id="taskDetails"></div>
-            <button onclick="createTaskPopUp()" id="createbtn">+</button>
+                <div id="taskDetails"> <!--display Task on click of name--> </div>
 
-            <!--This is the task creation form. I can move this to whatever page once done :) -->
-            <div class="createTaskPopup" style="display:none;" id="taskCreationDisplay">
-                <form id="createTaskForm" method="POST">
-                    <!--<p> task </p>-->
-                    <input type='text' name='taskTitle' required>
-                    <!--<p> description </p>
+                <!-- Creating task on click-->
+                <button onclick="createTaskPopUp()" id="viewCreateTaskBtn">+</button>
+                <!--This is the task creation form. I can move this to whatever page once done :) -->
+                <div class="createTaskPopup" style="display:none;" id="taskCreationDisplay">
+                    <form id="createTaskForm" method="POST">
+                        <!--<p> task </p>-->
+                        <input type='text' name='taskTitle' required>
+                        <!--<p> description </p>
                     <textarea name='taskDesc'></textarea> -->
-                    <button type="submit" id="createTaskBtn">&#10003;</button>
-                </form>
-                <div id="tempMessage"></div>
+                        <button type="submit" id="createTaskBtn">&#10003;</button>
+                        <button type="button" class="closeTaskCreation"> x </button>
+                    </form>
+                </div>
+
+                <!--Deleting all completed tasks easier!--> 
+                <button type="submit" onclick=deleteCompletedTasks() id="deleteCompleteTasks">Delete Finished</button>
             </div>
 
             <!--End of task info-->
@@ -74,12 +79,12 @@ include "databaseInfo.php";
                 <div class="createHabitPopup" style="display:none;" id="habitCreationDisplay">
                     <form id="createHabitForm" method="post">
                         <!--<p> habit </p>-->
-                        <div class="createHabitContainer">
+                        <div class="createHabitContainer" id="createHabitContainer">
                             <input type='text' name='habitTitle' required>
                             <!-- <p> description </p>
                             <textarea name='habitDesc'></textarea> -->
                             <button type="submit" id="createHabitbtn">&#10003;</button>
-                            <button type="button"id="closeHabitCreation"> x </button>
+                            <button type="button" class="closeHabitCreation"> x </button>
                         </div>
                     </form>
                 </div>
@@ -119,18 +124,25 @@ include "databaseInfo.php";
         const singleTaskView = document.getElementById("taskDetails");
         const taskCreationDisplay = document.getElementById("taskCreationDisplay");
         const createTaskForm = document.getElementById("createTaskForm");
-        const deleteCompleteTasks = document.getElementById("deleteCompleteTasks");
         let currentTaskID = null;
 
-        //deleting all completed tasks
-        deleteCompleteTasks.addEventListener("click", (event) => {
-            deleteCompletedTasks();
-        });
 
         //creating new tasks 
         createTaskForm.addEventListener("submit", async (event) => {
+            const taskData = new FormData(createTaskForm);
+            const createTaskBtn = document.getElementById("createTaskbtn");
             event.preventDefault();
-            await createTask();
+            await createTask(taskData);
+            createTaskForm.reset();
+            refreshTasks();
+        });
+
+        createTaskForm.addEventListener("click", async (event) => {
+            const createTaskDisplayBtn = document.getElementById("viewCreateTaskBtn");
+            if (event.target.classList.contains("closeTaskCreation")) {
+                taskCreationDisplay.style.display = "none";
+                createTaskDisplayBtn.style.display = "block";
+            }
         })
 
         // updating tasks when checkbox is clicked
@@ -152,7 +164,7 @@ include "databaseInfo.php";
             }
 
             //deleteing the task 
-            if(event.target.classList.contains("deleteTaskBtn")){
+            if (event.target.classList.contains("deleteTaskBtn")) {
                 const taskID = event.target.dataset.id;
                 //console.log("deleting: ", taskID);
                 deleteTask(taskID)
@@ -185,11 +197,15 @@ include "databaseInfo.php";
             refreshDailies();
         });
 
+        //closing the habit box when clicking the x
         createHabitForm.addEventListener("click", async (event) => {
-            if(event.target.classList.contains("closeHabitCreation")){
-                
+            //const createHabitContainer = document.getElementById("createHabitContainer");
+            const createHabitDisplayBtn = document.getElementById("viewCreateHabitBtn");
+            if (event.target.classList.contains("closeHabitCreation")) {
+                habitCreationDisplay.style.display = "none";
+                createHabitDisplayBtn.style.display = "block";
             }
-        })
+        });
 
         //updating habit status when clicked - this is good 
         dailyTodo.addEventListener("change", (event) => {
@@ -220,8 +236,6 @@ include "databaseInfo.php";
 
 
         });
-
-
 
         clearHabitCheckboxes.addEventListener("click", (event) => {
             clearHabitChecks();

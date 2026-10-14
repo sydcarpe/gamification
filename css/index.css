@@ -41,13 +41,13 @@ body {
 .containerOne{
     display: flex;
     flex-direction: column;
-    max-width: 20em;
+    padding:1.0em;
+    background-color: aqua;
 }
 
 .containerTwo{
     display:flex;
     flex-direction: column;
-    flex-wrap: wrap;
     padding: 1.0em;
-
+    width: 30em;
 }
