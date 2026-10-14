@@ -27,7 +27,7 @@ if(!$createHabit->execute()){
     exit;
 }
 
-$addDailySQL = "INSERT INTO dailies(habitID, userID) VALUES(?,?)";
+$addDailySQL = "INSERT INTO Dailies(habitID, userID) VALUES(?,?)";
 $addDaily = $conn->prepare($addDailySQL);
 if(!$addDaily){
     echo json_encode([

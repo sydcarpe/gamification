@@ -31,7 +31,7 @@ echo json_encode([
 
 
 
-$updateCheckbox = $conn->prepare("UPDATE Task SET completed = ? WHERE ID = ?");
+$updateCheckbox = $conn->prepare("UPDATE task SET completed = ? WHERE ID = ?");
 $updateCheckbox->bind_param("ii", $completed, $taskID); //Bools come in as 0 or 1 
 $updateCheckbox->execute();
 

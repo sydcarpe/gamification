@@ -8,7 +8,7 @@ $task = json_decode(file_get_contents("php://input"), true);
 $taskID = $task["taskID"];
 
 
-$getTaskSQL = "SELECT * FROM Task WHERE ID = $taskID";
+$getTaskSQL = "SELECT * FROM task WHERE ID = $taskID";
 $getTask = $conn->query($getTaskSQL);
 
 
