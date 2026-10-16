@@ -12,7 +12,7 @@ function renderTasks(tasks) {
                     <div class="singleTask" data-id="${task.ID}">
                         <p class="indivdualTask">${task.title}</p>
                     </div>
-                    <button class="deleteTaskBtn" data-id="${task.ID}"> X </button>
+                    <button class="deleteTaskBtn deleteButton" data-id="${task.ID}"> X </button>
                 </div>
                 `
     }).join("");

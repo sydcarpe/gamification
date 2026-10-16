@@ -29,8 +29,8 @@ if(!$createHabit->execute()){
 }
 
 //removing this for now
-/*
-$addDailySQL = "INSERT INTO dailies(habitID, userID) VALUES(?,?)";
+
+$addDailySQL = "INSERT INTO Dailies(habitID, userID) VALUES(?,?)";
 $addDaily = $conn->prepare($addDailySQL);
 if(!$addDaily){
     echo json_encode([
@@ -40,11 +40,6 @@ if(!$addDaily){
     exit;
 }
 
-echo json_encode([
-    "success" => true,
-    "habitID" => $createHabit->insert_id
-]);
-
 $habitID = $createHabit->insert_id;
 
 $addDaily->bind_param("ii", $habitID, $user_id);
@@ -52,11 +47,10 @@ $addDaily->bind_param("ii", $habitID, $user_id);
 if(!$addDaily->execute()){
     echo json_encode([
         "success" => false, 
-        "error" => "failed in daily" . $addDaily->error
+        "error" => "failed in daily " . $addDaily->error
     ]);
     exit;
 }
-    */
 
 //adding the habit to quest
 $addQuestHabitSQL = "INSERT INTO questHabits(questID, habitID) VALUES(?,?)";
@@ -86,7 +80,7 @@ if(!$addQuestHabit->execute()){
     ]);
     exit;
 }
-
+$addDaily->close();
 $createHabit->close();
 $addQuestHabit->close();
 $conn->close();

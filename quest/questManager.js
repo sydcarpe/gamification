@@ -9,7 +9,15 @@ async function refreshQuests() {
     const data = await loadQuests();
     //console.log(data);
     if (data.success) {
-        renderQuests(data.quests)
+        renderQuests(data.quests);
+    }
+}
+
+
+async function refreshQuestHabits(){
+    const data = await loadQuests();
+    if(data.success){
+        renderQuests(data.quests);
     }
 }
 
@@ -58,6 +66,7 @@ async function viewQuest(questID) {
                 return
             }
 
+            var detailedEdit = "";
             // if user is on the questHomePage it will show the edit btn 
             if (window.location.pathname.endsWith('questHomePage.php')) {
                 editBtn = `<button class="editQuestBtn" data-id='${quest.id}'> Quick Edit </button>`;

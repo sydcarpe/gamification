@@ -8,10 +8,7 @@ include "databaseInfo.php";
 <!--Including the other script pages-->
 
 <head>
-    <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/task.css">
-    <link rel="stylesheet" href="../css/habit.css">
-    <link rel="stylesheet" href="../css/quest.css">
+    <link rel="stylesheet" href="../css/questHomePage.css">
 
 
     <!--Font information-->
@@ -43,11 +40,9 @@ include "databaseInfo.php";
     <h2> All Quests </h2>
     <button id="createNewQuestBtn" onclick="createQuestDisplay()"> Create New Quest </button>
 
-    <div class="allQuestContainer"> <!--flex container to wrap the quests-->
-        <div id="questContainer">
-            <div id="questDetails"></div>
-        </div>
+    <div id="questContainer"> <!--where all quests populates?-->
     </div>
+
     <!-- what if I make this a popup as well?-->
     <div id="singleQuestViewer"> <!--Where a single quest displays on click  --></div>
 
@@ -58,10 +53,10 @@ include "databaseInfo.php";
         <form id="createQuestForm" method="post" action="quest/createQuest.php">
             <h2> Create new Quest </h2>
             <p> Quest Name </p>
-            <input type="text" required name = "questTitle">
+            <input type="text" required name="questTitle">
             <p> description </p>
             <input type="textbox" name="questDescription">
-            <input type="submit" value ="Create Quest">
+            <input type="submit" value="Create Quest">
         </form>
 
     </div>
@@ -91,11 +86,21 @@ include "databaseInfo.php";
 
         //viewing quest when clicked 
         questContainer.addEventListener("click", (event) => {
-            const questDiv = event.target.closest(".singleQuest");
-            if (!questDiv) return;
-            const questID = questDiv.dataset.id;
 
-            viewQuest(questID);
+            if (event.target.classList.contains("singleQuest")) { //header (H1)
+                const questDiv = event.target.closest(".singleQuest");
+                if (!questDiv) return;
+                const questID = questDiv.dataset.id;
+                viewQuest(questID);
+            }
+
+            //deleting the habit when clicked 
+            if (event.target.classList.contains("deleteHabitBtn")) {
+                const habitID = event.target.dataset.id;
+                console.log("Deleteing: ", habitID);
+                deleteHabit(habitID);
+            }
+
         });
 
 
@@ -138,7 +143,7 @@ include "databaseInfo.php";
             console.log("you've been clicked");
         }
 
-        createQuestContainer.addEventListener("submit", async (event)=>{
+        createQuestContainer.addEventListener("submit", async (event) => {
             if (event.target.id !== "createQuestForm") return;
 
             event.preventDefault();
@@ -146,7 +151,7 @@ include "databaseInfo.php";
             const createQuestForm = event.target;
             const creatQuestFormData = new FormData(createQuestForm);
 
-            try{
+            try {
                 const createQuestResponse = await fetch("quest/createQuest.php", {
                     method: "POST",
                     body: creatQuestFormData

@@ -51,3 +51,14 @@ body {
     padding: 1.0em;
     width: 30em;
 }
+
+.deleteButton{
+    background-color:orange;
+}
+
+.taskHeader{
+    display:flex;
+    flex-direction: row;
+    margin:0;
+    padding:0;
+}

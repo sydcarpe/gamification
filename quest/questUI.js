@@ -10,69 +10,38 @@ function renderInProgressQuests(quests) {
         const habitHTML = renderQuestHabits(quest.habits);
         const questStatus = "Not Started";
 
-        if (quest.status == "Not Started") {
-            return `
-            <div class = "singleQuest" data-id= "${quest.id}">
-            <h1 id='questSingleTitle'>${quest.title}</h1>
-            <select value="${quest.status}" onchange ="updateQuestStatus( ${quest.id},this.value)">
-            <option value = "Not Started" selected> Not Started </option>
-            <option value = "In Progress"> In Progress </option>
-            <option value = "Complete"> Complete </option>
+        return `
+            <div class="questCard" data-id = "${quest.id}">
+                <div class="singleQuest" data-id = "${quest.id}">
+                    <h1 class='questSingleTitle'>${quest.title}</h1>
 
-            </select>
-            <h3>Tasks</h3>
-            <div class="questTasksCont">
-            ${taskHTML}
-            </div>
+                    <select class="questStatus" onchange ="updateQuestStatus( ${quest.id},this.value)">
+                    <option value = "Not Started" 
+                        ${quest.status === "Not Started" ? "selected" : ""} > Not Started </option>
+                    <option value = "In Progress" ${quest.status === "In Progress" ? "selected" : ""}> In Progress </option>
+                    <option value = "Complete" ${quest.status === "Complete" ? "selected" : ""}> Complete </option>
+                    </select>
+                </div>
 
-            <h3>Habits</h3>
-            <div class="questHabitsCont">
-            ${habitHTML}
-            </div>
-        `;
-        } else if (quest.status == "In Progress") {
-            return `
-            <div class = "singleQuest" data-id= "${quest.id}">
-            <h1 id='questSingleTitle'>${quest.title}</h1>
-            <select value="${quest.status}" onchange ="updateQuestStatus( ${quest.id},this.value)">
-            <option value = "Not Started"> Not Started </option>
-            <option value = "In Progress" selected> In Progress </option>
-            <option value = "Complete"> Complete </option>
+                <div class="questContent">
+                    <div class="questTask">
+                        <h3>Tasks</h3>
 
-            </select>
-            <h3>Tasks</h3>
-            <div class="questTasksCont">
-            ${taskHTML}
-            </div>
+                        <div class="questTasksCont">
+                            ${taskHTML}
+                        </div>
+                    </div>
 
-            <h3>Habits</h3>
-            <div class="questHabitsCont">
-            ${habitHTML}
+                    <div class="questHabits">
+                        <h3>Habits</h3>
+
+                        <div class="questHabitsCont">
+                            ${habitHTML}
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
-        } else if (quest.status == "Complete") { //completed one. May need to show this in a different field or something
-            return `
-            <div class = "singleQuest" data-id= "${quest.id}">
-            <h1 id='questSingleTitle'>${quest.title}</h1>
-            <select value="${quest.status}" onchange ="updateQuestStatus( ${quest.id},this.value)">
-            <option value = "Not Started"> Not Started </option>
-            <option value = "In Progress"> In Progress </option>
-            <option value = "Complete" selected> Complete </option>
-
-            </select>
-            <h3>Tasks</h3>
-            <div class="questTasksCont">
-            ${taskHTML}
-            </div>
-
-            <h3>Habits</h3>
-            <div class="questHabitsCont">
-            <div id='dailyTodo'></div>
-            ${habitHTML}
-            </div>
-        `;
-        }
-
 
     }).join("");
     questContainer.innerHTML = questHTML;
@@ -86,10 +55,11 @@ function renderQuestTasks(tasks) {
 
     return tasks.map(task => {
         return `<div class="taskRow">
-                <input class="task-checkbox" type="checkbox" data-id="${task.ID}" ${task.completed == 1 ? "checked" : ""}>
-                <div class="singleTask" data-id="${task.ID}">
-                <p>${task.title}</p>
-                </div>
+                    <input class="task-checkbox" type="checkbox" data-id="${task.ID}" ${task.completed == 1 ? "checked" : ""}>
+                    <div class="singleTask" data-id="${task.ID}">
+                        <p>${task.title}</p>
+                    </div>
+                    <button class="deleteTaskBtn deleteButton" data-id="${task.ID}"> X </button>
                 </div>
             `
     }).join("");
@@ -105,9 +75,10 @@ function renderQuestHabits(habits) {
             <div class="habitRow">
                 <input class="habit-checkbox" type="checkbox" data-id="${habit.ID}" ${habit.completed == 1 ? "checked" : ""}>
                 <div class="singleHabit" data-id="${habit.ID}">
-                <p>${habit.title}</p>
+                    <p>${habit.title}</p>
+                    <button class="deleteHabitBtn deleteButton" data-id="${habit.ID}"> X </button>
                 </div>
-                </div>
+            </div>
         `
     }).join("");
 }
@@ -123,68 +94,38 @@ function renderQuests(quests) {
         const taskHTML = renderQuestTasks(quest.tasks);
         const habitHTML = renderQuestHabits(quest.habits);
 
-        if (quest.status == "Not Started") {
-            return `<hr>
-            <div class = "singleQuest" data-id= "${quest.id}">
-            <h1>${quest.title}</h1>
-            <select value="${quest.status}" onchange ="updateQuestStatus( ${quest.id},this.value)">
-            <option value = "Not Started" selected> Not Started </option>
-            <option value = "In Progress"> In Progress </option>
-            <option value = "Complete"> Complete </option>
+        return `
+        <div class="questCard" data-id = "${quest.id}">
+                <div class="singleQuest" data-id = "${quest.id}">
+                    <h1 class='questSingleTitle'>${quest.title}</h1>
 
-            </select>
-            <h3>Tasks</h3>
-            <div class="questTasksCont">
-            ${taskHTML}
-            </div>
+                    <select class="questStatus" onchange ="updateQuestStatus( ${quest.id},this.value)">
+                    <option value = "Not Started" 
+                        ${quest.status === "Not Started" ? "selected" : ""} > Not Started </option>
+                    <option value = "In Progress" ${quest.status === "In Progress" ? "selected" : ""}> In Progress </option>
+                    <option value = "Complete" ${quest.status === "Complete" ? "selected" : ""}> Complete </option>
+                    </select>
+                </div>
 
-            <h3>Habits</h3>
-            <div class="questHabitsCont">
-            ${habitHTML}
-            </div>
-        `;
-        } else if (quest.status == "In Progress") {
-            return `<hr>
-            <div class = "singleQuest" data-id= "${quest.id}">
-            <h1>${quest.title}</h1>
-            <select value="${quest.status}" onchange ="updateQuestStatus( ${quest.id},this.value)">
-            <option value = "Not Started"> Not Started </option>
-            <option value = "In Progress" selected> In Progress </option>
-            <option value = "Complete"> Complete </option>
+                <div class="questContent">
+                    <div class="questTask">
+                        <h3>Tasks</h3>
 
-            </select>
-            <h3>Tasks</h3>
-            <div class="questTasksCont">
-            ${taskHTML}
-            </div>
+                        <div class="questTasksCont">
+                            ${taskHTML}
+                        </div>
+                    </div>
 
-            <h3>Habits</h3>
-            <div class="questHabitsCont">
-            ${habitHTML}
+                    <div class="questHabits">
+                        <h3>Habits</h3>
+
+                        <div class="questHabitsCont">
+                            ${habitHTML}
+                        </div>
+                    </div>
+                </div>
             </div>
         `;
-        } else if (quest.status == "Complete") { //completed one. May need to show this in a different field or something
-            return `<hr>
-            <div class = "singleQuest" data-id= "${quest.id}">
-            <h1>${quest.title}</h1>
-            <select value="${quest.status}" onchange ="updateQuestStatus( ${quest.id},this.value)">
-            <option value = "Not Started"> Not Started </option>
-            <option value = "In Progress"> In Progress </option>
-            <option value = "Complete" selected> Complete </option>
-
-            </select>
-            <h3>Tasks</h3>
-            <div class="questTasksCont">
-            ${taskHTML}
-            </div>
-
-            <h3>Habits</h3>
-            <div class="questHabitsCont">
-            ${habitHTML}
-            </div>
-        `;
-        }
-
 
     }).join("");
     questContainer.innerHTML = questHTML;

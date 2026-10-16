@@ -14,12 +14,6 @@
     padding: 2.0em;
 }
 
-.allQuestContainer {
-    background-color: pink;
-    height: 30em;
-    overflow: scroll;
-    top: 15px;
-}
 
 .questContainer {
     width: 100%;
@@ -45,4 +39,56 @@
 .createTaskBtn {
     max-height: fit-content;
     align-self: flex-end;
+}
+
+.questCard {
+width: 100%;
+border: 2px solid #333;
+border-radius: 12px;
+overflow: hidden;
+margin-bottom: 1em;
+background-color: white;
+}
+ 
+
+.questSingleTitle {
+margin: 0;
+font-size: 1.25rem;
+}
+ 
+.questStatus {
+min-height: 44px;
+padding: 0.5em;
+font-size: 1rem;
+}
+ 
+.questContent {
+padding: 1em;
+}
+
+.questHabits{
+background-color:rgb(173, 241, 209);
+padding: 1.0em;
+
+}
+
+.questHabitsCont{
+width:100%;
+}
+
+.questTaskCont{
+width: 100%;
+}
+.questTask{
+background-color:rgb(173, 224, 241);
+padding: 1.0em;
+
+}
+
+.questTask p{
+max-width: max-content;
+}
+
+.questTask button{
+    background-color: aqua;
 }

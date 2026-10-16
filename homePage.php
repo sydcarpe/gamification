@@ -38,10 +38,12 @@ include "databaseInfo.php";
     <div class="bodyContainer">
         <div class="containerOne">
             <div class="taskBody">
-                <h2>To Do</h2>
+                <div class="taskHeader">
+                   <p>pic</p> <h2>To Do</h2>
+                </div>
                 <!-- All task information below here-->
                 <div id="taskContainer"><!--This is where the tasks go! --></div>
-                
+
 
                 <div id="taskDetails"> <!--display Task on click of name--> </div>
 
@@ -59,7 +61,7 @@ include "databaseInfo.php";
                     </form>
                 </div>
 
-                <!--Deleting all completed tasks easier!--> 
+                <!--Deleting all completed tasks easier!-->
                 <button type="submit" onclick=deleteCompletedTasks() id="deleteCompleteTasks">Delete Finished</button>
             </div>
 
@@ -96,11 +98,11 @@ include "databaseInfo.php";
         <!--Quest things -->
         <div class="containerTwo">
             <h2> In Progress Quests </h2>
-            <div id="questContainer">
-            </div>
+            goopy
+            <div id="questContainer"></div>
+            goopy
             <div id="singleQuestViewer"> <!--Where a single quest displays on click  --></div>
             <button id="viewAllQuests" class="viewAllQuestBtn" onclick="window.location.href='questHomePage.php';">View All Quests</button>
-
         </div>
     </div>
 

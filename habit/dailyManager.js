@@ -131,6 +131,26 @@ async function viewHabit(habitID) {
 
 //deleting habit TO DO  
 async function deleteHabit(habitID) {
+    if(window.location.pathname.endsWith('questHomePage.php')){
+        console.log("This is my test!" , habitID);
+        try {
+            const response = await fetch("habit/deleteHabit.php", {
+                method: "POST",
+                headers: {
+                    'Content-type' : 'application/json'
+                },
+                body: JSON.stringify({
+                    habitID: habitID
+                })
+            });
+            await refreshQuests();
+        }
+        catch(err){
+            console.error(err);
+        }
+        return;
+    }
+
     console.log("deleteing" , habitID);
     try {
         const response = await fetch("habit/deleteHabit.php", {
