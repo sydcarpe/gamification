@@ -181,3 +181,8 @@ async function deleteQuest(questID) {
     }
 
 }
+
+
+function createQuestHabitPopup(){
+   viewCreateQuestHabitBtn.style.display = "none";
+}

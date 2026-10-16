@@ -1,7 +1,3 @@
-.allQuestContainer{
-    background-color:lightblue;
-}
-
 .questContainer{
     font-size: 100px;
     background-color: orange;
@@ -36,5 +32,32 @@
 
 .deleteHabitBtn{
     margin-left: auto;
+}
+
+.singleQuest{
+}
+
+
+/*Task info*/
+.taskRow{
+    display: flex;
+    flex-direction: row;
+    padding: .5em;
+    width: 100%;
+    align-items: center;
+}
+
+.singleTask{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.deleteTaskBtn{
+    margin-left: auto;
+}
+
+.taskBody{
+    background-color: grey;
 }
 

@@ -131,8 +131,8 @@ async function viewHabit(habitID) {
 
 //deleting habit TO DO  
 async function deleteHabit(habitID) {
+    
     if(window.location.pathname.endsWith('questHomePage.php')){
-        console.log("This is my test!" , habitID);
         try {
             const response = await fetch("habit/deleteHabit.php", {
                 method: "POST",
@@ -150,6 +150,7 @@ async function deleteHabit(habitID) {
         }
         return;
     }
+        
 
     console.log("deleteing" , habitID);
     try {

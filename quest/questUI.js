@@ -29,6 +29,7 @@ function renderInProgressQuests(quests) {
 
                         <div class="questTasksCont">
                             ${taskHTML}
+
                         </div>
                     </div>
 
@@ -37,6 +38,19 @@ function renderInProgressQuests(quests) {
 
                         <div class="questHabitsCont">
                             ${habitHTML}
+                        </div>
+                        <button onclick = "createQuestHabitPopup()" id="viewCreateQuestHabitBtn"> + </button>
+                        <div class="createQuestHabitPopup" style="display:none;" id="habitQuestCreationDisplay">
+                            <form id="createQuestHabitForm" method="post">
+                                <!--<p> habit </p>-->
+                                <div class="createQuestHabitContainer" id="createQuestHabitContainer">
+                                    <input type='text' name='habitTitle' required>
+                                    <!-- <p> description </p>
+                                    <textarea name='habitDesc'></textarea> -->
+                                    <button type="submit" id="createQuestHabitbtn">&#10003;</button>
+                                    <button type="button" class="closeQuestHabitCreation"> x </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -121,6 +135,19 @@ function renderQuests(quests) {
 
                         <div class="questHabitsCont">
                             ${habitHTML}
+                        </div>
+                        <button onclick="createQuestHabitPopup()" id="viewCreateQuestHabitBtn"> + </button>
+                        <div class="createHabitPopup" style="display:none;" id="habitCreationDisplay">
+                            <form id="createQuestHabitForm" method="post">
+                                <!--<p> habit </p>-->
+                                <div class="createQuestHabitContainer" id="createQuestHabitContainer">
+                                    <input type='text' name='habitTitle' required>
+                                    <!-- <p> description </p>
+                                    <textarea name='habitDesc'></textarea> -->
+                                    <button type="submit" id="createQuestHabitbtn">&#10003;</button>
+                                    <button type="button" class="closeQuestHabitCreation"> x </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

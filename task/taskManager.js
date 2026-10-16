@@ -108,6 +108,28 @@ async function viewTask(taskID) {
 
 async function deleteTask(taskID) {
     //console.log(taskID);
+    if (window.location.pathname.endsWith('questHomePage.php')) {
+        console.log("This is my other test!", taskID);
+        try {
+            const response = await fetch("task/deleteTaskAjax.php", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    taskID: taskID
+                })
+
+            });
+
+            await refreshQuests();
+
+        } catch (err) {
+            console.error(err);
+        }
+        
+        return;
+    }
 
     try {
         const response = await fetch("task/deleteTaskAjax.php", {
@@ -131,8 +153,8 @@ async function deleteTask(taskID) {
 
 //creating the task after btn click 
 async function createTask(formData) {
-    const createResponse = await fetch ("task/createTask.php", {
-        method:"POST",
+    const createResponse = await fetch("task/createTask.php", {
+        method: "POST",
         body: formData
     });
     return await createResponse.json();

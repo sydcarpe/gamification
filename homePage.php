@@ -98,9 +98,7 @@ include "databaseInfo.php";
         <!--Quest things -->
         <div class="containerTwo">
             <h2> In Progress Quests </h2>
-            goopy
             <div id="questContainer"></div>
-            goopy
             <div id="singleQuestViewer"> <!--Where a single quest displays on click  --></div>
             <button id="viewAllQuests" class="viewAllQuestBtn" onclick="window.location.href='questHomePage.php';">View All Quests</button>
         </div>
@@ -208,6 +206,7 @@ include "databaseInfo.php";
                 createHabitDisplayBtn.style.display = "block";
             }
         });
+
 
         //updating habit status when clicked - this is good 
         dailyTodo.addEventListener("change", (event) => {

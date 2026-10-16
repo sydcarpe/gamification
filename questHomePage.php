@@ -42,7 +42,6 @@ include "databaseInfo.php";
 
     <div id="questContainer"> <!--where all quests populates?-->
     </div>
-
     <!-- what if I make this a popup as well?-->
     <div id="singleQuestViewer"> <!--Where a single quest displays on click  --></div>
 
@@ -72,6 +71,7 @@ include "databaseInfo.php";
         let currentQuestID = null;
         const singleQuestViewer = document.getElementById("singleQuestViewer");
         const viewAllQuestBtn = document.getElementById("viewAllQuests");
+        const questCard = document.getElementById("questCard");
 
 
         //updating quest tasks/habits when checkbox is clicked 
@@ -84,10 +84,13 @@ include "databaseInfo.php";
             }
         })
 
+
+
         //viewing quest when clicked 
         questContainer.addEventListener("click", (event) => {
 
-            if (event.target.classList.contains("singleQuest")) { //header (H1)
+            const singleQuest = document.getElementById("singleQuest");
+            if(event.target.classList.contains("questSingleTitle")){
                 const questDiv = event.target.closest(".singleQuest");
                 if (!questDiv) return;
                 const questID = questDiv.dataset.id;
@@ -100,6 +103,21 @@ include "databaseInfo.php";
                 console.log("Deleteing: ", habitID);
                 deleteHabit(habitID);
             }
+
+            //deleting the task when clicked :) 
+            if(event.target.classList.contains("deleteTaskBtn")){
+                const taskID = event.target.dataset.id;
+                console.log("Deleting task: ", taskID);
+                deleteTask(taskID);
+            }
+
+            //TODO create QuestHabit & QuestTask
+            //getting the const of the different IDS on quests 
+            const viewCreateQuestHabitBtn = document.getElementById("viewCreateQuestHabitBtn");
+            const questHabitPopup = document.getElementById("createQuestHabitPopup"); //habit popup
+            const viewCreateQuestTaskBtn = document.getElementById("viewCreateQuestTaskBtn");
+            const questTaskPopup = document.getElementById("createQuestTaskPopup");
+
 
         });
 
@@ -131,8 +149,6 @@ include "databaseInfo.php";
             }
 
         });
-
-
 
         //Create Quest Stuff
         const createQuestContainer = document.getElementById("createQuestContainer");
@@ -259,6 +275,7 @@ include "databaseInfo.php";
             }
 
         })
+
 
         refreshQuests();
     </script>

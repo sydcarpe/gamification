@@ -6,7 +6,6 @@ header('Content-Type: application/json');
 $habit = json_decode(file_get_contents("php://input"), true);
 
 $habitID = $habit["habitID"];
-//$questID = $quest["questID"] ?? null;
 
 //if it is in a quest, delete from that quest! But first, must see if there are!
 $habitInQuestSQL = "SELECT h.ID FROM habit h INNER JOIN questHabits qh on h.ID = qh.habitID WHERE h.ID = ?;";
