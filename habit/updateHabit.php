@@ -88,7 +88,7 @@ echo json_encode([
 ]);
 
 
-$updatePoints = $conn->prepare("UPDATE user SET totalPoints = $totalPoints");
+$updatePoints = $conn->prepare("UPDATE User SET totalPoints = $totalPoints");
 $updatePoints->execute();
 
 $updateCheckbox = $conn->prepare("UPDATE habit SET completed = ?, longestStreak = ?, currentStreak = ?, lastCompletedDate = ? WHERE ID = ?");
