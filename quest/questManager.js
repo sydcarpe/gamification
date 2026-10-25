@@ -14,9 +14,9 @@ async function refreshQuests() {
 }
 
 
-async function refreshQuestHabits(){
+async function refreshQuestHabits() {
     const data = await loadQuests();
-    if(data.success){
+    if (data.success) {
         renderQuests(data.quests);
     }
 }
@@ -32,8 +32,9 @@ async function refreshInProgressQuests() {
 
 //viewing quest on click! 
 async function viewQuest(questID) {
+
     if (window.location.pathname.endsWith('questHomePage.php')) {
-        questEditContainer.style.display ="none";
+        questEditContainer.style.display = "none";
     }
 
     //console.log("QuestID: ", questID);
@@ -79,6 +80,7 @@ async function viewQuest(questID) {
                 <h2>${quest.title}</h2>
                 <p>${quest.description}</p>
                 <p>${quest.status}</p>
+                
                 <button class="deleteQuestBtn" data-id="${quest.id}"> Delete </button>
                 ` + editBtn + detailedEdit;
 
@@ -183,6 +185,37 @@ async function deleteQuest(questID) {
 }
 
 
-function createQuestHabitPopup(){
-   viewCreateQuestHabitBtn.style.display = "none";
+/* i aint doing this 
+function createQuestHabitPopup() {
+    const viewCreateQuestHabitBtn = document.getElementById("viewCreateQuestHabitBtn");
+    const questHabitPopup = document.getElementById("habitCreationDisplay"); //habit popup
+    console.log("heelo ");
+    viewCreateQuestHabitBtn.style.display = "none";
+    questHabitPopup.style.display = "block";
 }
+
+function closeQuestHabitCreation() {
+    const viewCreateQuestHabitBtn = document.getElementById("viewCreateQuestHabitBtn");
+    const questHabitPopup = document.getElementById("habitCreationDisplay"); //habit popup
+    console.log("heelo ");
+    viewCreateQuestHabitBtn.style.display = "block";
+    questHabitPopup.style.display = "none";
+}
+
+
+function createQuestTaskPopup() {
+    const viewCreateQuestHabitBtn = document.getElementById("viewCreateQuestHabitBtn");
+    const questHabitPopup = document.getElementById("habitCreationDisplay"); //habit popup
+    console.log("heelo ");
+    viewCreateQuestHabitBtn.style.display = "none";
+    questHabitPopup.style.display = "block";
+}
+
+function closeQuestTaskPopup() {
+    const viewCreateQuestHabitBtn = document.getElementById("viewCreateQuestHabitBtn");
+    const questHabitPopup = document.getElementById("habitCreationDisplay"); //habit popup
+    console.log("heelo ");
+    viewCreateQuestHabitBtn.style.display = "block";
+    questHabitPopup.style.display = "none";
+}
+    */

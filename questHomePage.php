@@ -84,13 +84,15 @@ include "databaseInfo.php";
             }
         })
 
+        
+
 
 
         //viewing quest when clicked 
         questContainer.addEventListener("click", (event) => {
 
             const singleQuest = document.getElementById("singleQuest");
-            if(event.target.classList.contains("questSingleTitle")){
+            if (event.target.classList.contains("questSingleTitle")) {
                 const questDiv = event.target.closest(".singleQuest");
                 if (!questDiv) return;
                 const questID = questDiv.dataset.id;
@@ -105,7 +107,7 @@ include "databaseInfo.php";
             }
 
             //deleting the task when clicked :) 
-            if(event.target.classList.contains("deleteTaskBtn")){
+            if (event.target.classList.contains("deleteTaskBtn")) {
                 const taskID = event.target.dataset.id;
                 console.log("Deleting task: ", taskID);
                 deleteTask(taskID);
@@ -113,8 +115,7 @@ include "databaseInfo.php";
 
             //TODO create QuestHabit & QuestTask
             //getting the const of the different IDS on quests 
-            const viewCreateQuestHabitBtn = document.getElementById("viewCreateQuestHabitBtn");
-            const questHabitPopup = document.getElementById("createQuestHabitPopup"); //habit popup
+
             const viewCreateQuestTaskBtn = document.getElementById("viewCreateQuestTaskBtn");
             const questTaskPopup = document.getElementById("createQuestTaskPopup");
 
