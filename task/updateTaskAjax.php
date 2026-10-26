@@ -35,7 +35,7 @@ $updateCheckbox = $conn->prepare("UPDATE task SET completed = ? WHERE ID = ?");
 $updateCheckbox->bind_param("ii", $completed, $taskID); //Bools come in as 0 or 1 
 $updateCheckbox->execute();
 
-$updateUser = $conn->prepare("UPDATE user SET totalPoints = ? WHERE ID = ?");
+$updateUser = $conn->prepare("UPDATE User SET totalPoints = ? WHERE ID = ?");
 $updateUser->bind_param("ii", $totalPoints, $user_id);
 $updateUser->execute();
 

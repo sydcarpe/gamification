@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 
 $servername = "localhost";
 $username = "root";
-$password = "password123";
+$password = "chester";
 $dbname = "life_tracker";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
